@@ -1,5 +1,3 @@
-import "../index.css";
-
 const Projects = () => {
   const projectList = [
     {
@@ -21,7 +19,7 @@ const Projects = () => {
         "ToDo Tracker is a management app that lets users add, edit, and delete tasks with deadlines. It includes visual indicators to track progress and filters to sort tasks by due date or completion. Built with React, Node.js, and Express, the UI uses modern CSS with Flexbox and Grid to ensure a clean, responsive experience across devices.",
     },
     {
-      title: "Youtube Replica",
+      title: "Youtube Replicaa",
       link: "https://youtube-replica-project.vercel.app",
       description:
         "This YouTube replica highlights responsive design using HTML, CSS Flexbox, and Grid. It features a scalable layout with a dynamic video grid, adaptive sidebar, and media elements that adjust smoothly across all screen sizes. The project emphasizes clean, semantic HTML and modern CSS techniques to ensure a polished and consistent user experience on any device.",
