@@ -46,7 +46,9 @@ const Contact = () => {
   return (
     <section className="relative flex flex-col items-center justify-center min-h-screen text-center p-6 bg-black text-matrix-green overflow-hidden">
       <div className="matrix-rain absolute inset-0 z-0"></div>
-      <h2 className="text-3xl font-bold mb-4">Contact Me</h2>
+      <h2 className="text-3xl font-bold mb-4 glitch " data-text="Contact Me">
+        Contact Me
+      </h2>
       <p className="mb-6">
         Interested in exploring potential opportunities to collaborate or
         contribute to your team? Feel free to reach out!

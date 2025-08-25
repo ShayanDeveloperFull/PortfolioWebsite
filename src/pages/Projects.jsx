@@ -30,28 +30,28 @@ const Projects = () => {
     <section className="relative min-h-screen flex flex-col items-center justify-center bg-black text-matrix-green overflow-hidden">
       <div className="matrix-rain absolute inset-0 z-0"></div>
       {/* Rain effect div */}
-      <div className="z-10 w-full max-w-6xl p-8">
-        <h2
-          className="text-4xl font-matrix glitch text-center mb-8 w-full"
-          data-text="My Projects"
-        >
-          My Projects
-        </h2>
-        {/* Two-column layout */}
-        <div className="grid gap-16">
-          {projectList.map((proj, idx) => (
-            <a
-              key={idx}
-              href={proj.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-card inline-block relative"
-            >
-              <h3 className="btn-matrix inline-block">{proj.title}</h3>
-              <div className="project-desc-popup">{proj.description}</div>
-            </a>
-          ))}
-        </div>
+
+      <h2
+        className="text-4xl font-matrix text-center mb-8 w-full glitch"
+        data-text="My Projects"
+      >
+        My Projects
+      </h2>
+
+      {/* Two-column layout */}
+      <div className="grid gap-16">
+        {projectList.map((proj, idx) => (
+          <a
+            key={idx}
+            href={proj.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-card inline-block relative"
+          >
+            <h3 className="btn-matrix inline-block">{proj.title}</h3>
+            <div className="project-desc-popup">{proj.description}</div>
+          </a>
+        ))}
       </div>
     </section>
   );
