@@ -3,15 +3,9 @@ html,
 body {
   margin: 0;
   padding: 0;
-  /* Softer, more neutral backdrop (less saturated green) */
-  --matrix-bg-gradient: radial-gradient(
-    circle at 22% 18%,
-    #07140e 0%,
-    #04100c 28%,
-    #020806 55%,
-    #000 80%
-  );
-  background: var(--matrix-bg-gradient);
+  /* Reverted to solid black background (keeping other variables for potential future use) */
+  --matrix-bg-gradient: none;
+  background: #000;
   overflow: hidden;
   font-family: "Share Tech Mono", monospace;
   height: 100%;
