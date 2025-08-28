@@ -294,8 +294,8 @@ form .btn-matrix {
     0 0 0 1px var(--matrix-primary) inset;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.8s ease-out,
-    transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: opacity 1.0s ease-out,
+    transform 1.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 999;
   text-align: left;
   font-size: 0.9rem;
