@@ -152,18 +152,20 @@ const Home = () => {
     <section className="relative min-h-screen flex items-center justify-center bg-black text-matrix-green overflow-hidden">
       <div className="matrix-rain absolute inset-0 z-0">{rainDrops}</div>
       <div className="z-10 text-center space-y-6 max-w-4xl px-6">
-        <h1
-          className="font-matrix glitch name-with-photo leading-none"
-          data-text="SHAYAN ASADPOUR"
-          style={{ lineHeight: 1 }}
-        >
-          SHAYAN ASADPOUR
+        <div className="name-with-photo">
+          <h1
+            className="font-matrix glitch leading-none"
+            data-text="SHAYAN ASADPOUR"
+            style={{ lineHeight: 1 }}
+          >
+            SHAYAN ASADPOUR
+          </h1>
           <img
-            src="/profile-photo.jpeg"
+            src="/profile-photo.png"
             alt="Profile"
             className="profile-inline"
           />
-        </h1>
+        </div>
         <h2 className="text-2xl md:text-3xl font-matrix typing-cursor min-h-[2.5rem]">
           {subtitle}
         </h2>
