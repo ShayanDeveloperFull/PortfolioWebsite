@@ -727,8 +727,21 @@ form .btn-matrix {
   flex-direction: column;
   gap: 0.85rem;
   transform-origin: top right;
-  animation: panelIn 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+.matrix-control-panel.panel-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.matrix-control-panel.panel-hidden {
+  opacity: 0;
+  transform: scale(0.8) translateY(-20px);
+  pointer-events: none;
+}
+
 @keyframes panelIn {
   from {
     transform: scale(0.6) translateY(-10px);

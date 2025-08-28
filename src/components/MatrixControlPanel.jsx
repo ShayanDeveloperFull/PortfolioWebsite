@@ -8,6 +8,8 @@ const THEMES = [
 
 export default function MatrixControlPanel() {
   const [open, setOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   const [paused, setPaused] = useState(false);
   const [speedMode, setSpeedMode] = useState("normal"); // normal | slow | fast
 
@@ -25,6 +27,26 @@ export default function MatrixControlPanel() {
       })
     );
   }, [speedMode]);
+
+  // Handle smooth panel animation
+  useEffect(() => {
+    if (open) {
+      setShouldRender(true);
+      setIsAnimating(true);
+      // Small delay to ensure the element is rendered before starting animation
+      const timer = setTimeout(() => {
+        setIsAnimating(false);
+      }, 50);
+      return () => clearTimeout(timer);
+    } else {
+      setIsAnimating(true);
+      const timer = setTimeout(() => {
+        setShouldRender(false);
+        setIsAnimating(false);
+      }, 800); // Increased to match the new CSS transition duration
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
 
   const applyTheme = (cls) => {
     document.body.classList.remove(
@@ -44,8 +66,12 @@ export default function MatrixControlPanel() {
       >
         {open ? "×" : "Matrix Control"}
       </button>
-      {open && (
-        <div className="matrix-control-panel">
+      {shouldRender && (
+        <div
+          className={`matrix-control-panel ${
+            open && !isAnimating ? "panel-visible" : "panel-hidden"
+          }`}
+        >
           <h4>MATRIX CONTROL</h4>
           {/* Removed legacy rain speed slider now that discrete speed mode buttons exist */}
           <div style={{ marginTop: "0.5rem" }}>
