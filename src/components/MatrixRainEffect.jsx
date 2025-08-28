@@ -27,7 +27,12 @@ const MatrixRainEffect = () => {
       context.fillStyle = "rgba(0, 0, 0, 0.05)";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      context.fillStyle = "#0F0";
+      // Use current theme primary color (fallback to green)
+      const themePrimary =
+        getComputedStyle(document.body)
+          .getPropertyValue("--matrix-primary")
+          .trim() || "#0F0";
+      context.fillStyle = themePrimary;
       context.font = fontSize + "px monospace";
 
       for (let i = 0; i < rainDrops.length; i++) {
@@ -43,9 +48,40 @@ const MatrixRainEffect = () => {
       }
     };
 
-    const interval = setInterval(draw, 30);
+    let paused = false;
+    const NORMAL_INTERVAL = 30; // ms per frame draw attempt
+    const SLOW_INTERVAL = 100; // slower
+    const FAST_INTERVAL = 15; // faster
+    let currentInterval = NORMAL_INTERVAL;
+    let intervalId;
 
-    return () => clearInterval(interval);
+    const startInterval = () => {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        if (!paused) draw();
+      }, currentInterval);
+    };
+
+    const handleToggle = (e) => {
+      paused = !!e.detail.paused;
+    };
+    const handleSpeed = (e) => {
+      const mode = e.detail?.mode;
+      if (mode === "slow") currentInterval = SLOW_INTERVAL;
+      else if (mode === "fast") currentInterval = FAST_INTERVAL;
+      else currentInterval = NORMAL_INTERVAL;
+      startInterval();
+    };
+    window.addEventListener("matrix-rain-toggle", handleToggle);
+    window.addEventListener("matrix-rain-speed", handleSpeed);
+
+    startInterval();
+
+    return () => {
+      window.removeEventListener("matrix-rain-toggle", handleToggle);
+      window.removeEventListener("matrix-rain-speed", handleSpeed);
+      if (intervalId) clearInterval(intervalId);
+    };
   }, []);
 
   return null;

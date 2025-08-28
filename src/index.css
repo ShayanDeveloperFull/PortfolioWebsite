@@ -3,11 +3,110 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
+  /* Softer, more neutral backdrop (less saturated green) */
+  --matrix-bg-gradient: radial-gradient(
+    circle at 22% 18%,
+    #07140e 0%,
+    #04100c 28%,
+    #020806 55%,
+    #000 80%
+  );
+  background: var(--matrix-bg-gradient);
   overflow: hidden;
   font-family: "Share Tech Mono", monospace;
   height: 100%;
   position: relative;
+  color: var(--matrix-primary);
+}
+
+/* THEME VARIABLES */
+:root {
+  --matrix-primary: #00ff41;
+  --matrix-accent: #00fff9;
+  --matrix-accent-2: #ff00c1;
+  --matrix-bg: #000;
+  --matrix-panel-bg: rgba(0, 0, 0, 0.7);
+  --matrix-panel-border: var(--matrix-primary);
+  --matrix-font: "Share Tech Mono", monospace;
+  --matrix-glow: 0 0 6px var(--matrix-primary), 0 0 12px var(--matrix-primary);
+  /* Derived color variants */
+  --matrix-primary-10: color-mix(
+    in srgb,
+    var(--matrix-primary) 10%,
+    transparent
+  );
+  --matrix-primary-20: color-mix(
+    in srgb,
+    var(--matrix-primary) 20%,
+    transparent
+  );
+  --matrix-primary-30: color-mix(
+    in srgb,
+    var(--matrix-primary) 30%,
+    transparent
+  );
+  --matrix-primary-40: color-mix(
+    in srgb,
+    var(--matrix-primary) 40%,
+    transparent
+  );
+  --matrix-primary-50: color-mix(
+    in srgb,
+    var(--matrix-primary) 50%,
+    transparent
+  );
+  --matrix-primary-60: color-mix(
+    in srgb,
+    var(--matrix-primary) 60%,
+    transparent
+  );
+  --matrix-primary-70: color-mix(
+    in srgb,
+    var(--matrix-primary) 70%,
+    transparent
+  );
+  --matrix-primary-80: color-mix(
+    in srgb,
+    var(--matrix-primary) 80%,
+    transparent
+  );
+  --matrix-primary-90: color-mix(
+    in srgb,
+    var(--matrix-primary) 90%,
+    transparent
+  );
+}
+
+body.theme-cyan {
+  /* Neo Cyan (calmer) */
+  --matrix-primary: #00e0ff;
+  --matrix-accent: #7bffb2;
+  --matrix-panel-border: #00e0ff;
+}
+body.theme-magenta {
+  --matrix-primary: #ff00c1;
+  --matrix-accent: #00fff9;
+  --matrix-panel-border: #ff00c1;
+}
+body.theme-green {
+  --matrix-primary: #00ff41;
+  --matrix-accent: #00fff9;
+  --matrix-panel-border: #00ff41;
+}
+/* Amber retro terminal */
+body.theme-amber {
+  --matrix-primary: #ffbf00;
+  --matrix-accent: #ff6b00;
+}
+/* Electric Violet synthwave */
+body.theme-violet {
+  --matrix-primary: #a855ff;
+  --matrix-accent: #00ffe5;
+}
+/* Stealth subdued */
+body.theme-stealth {
+  --matrix-primary: #b8f5d4;
+  --matrix-accent: #7fd0ff;
 }
 
 /* Matrix rain effect container */
@@ -27,19 +126,19 @@ body {
 /* Each rain drop line */
 .matrix-rain .rain-drop {
   position: absolute;
-  width: 2px; /* Width of each drop */
-  height: 100%; /* Make the rain cover the entire height of the screen */
+  width: 2px;
+  height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    #00ff41,
-    #00ff41 2px,
+    var(--matrix-primary),
+    var(--matrix-primary) 2px,
     transparent 2px,
-    transparent 4px
+    transparent 6px
   );
-  animation: rain 3s linear infinite; /* Slowed down to 3 seconds */
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  opacity: 0.7;
+  animation: rain var(--rain-speed, 3s) linear infinite;
+  opacity: 0.55;
+  filter: drop-shadow(0 0 4px var(--matrix-primary));
+  mix-blend-mode: screen;
 }
 
 /* Keyframe for continuous rain effect */
@@ -66,7 +165,7 @@ body {
 
 /* Text and button color */
 .text-matrix-green {
-  color: #00ff41;
+  color: var(--matrix-primary);
 }
 
 .font-matrix {
@@ -75,28 +174,30 @@ body {
 
 /* Input field styles */
 .input-matrix {
-  background: transparent;
-  border: 1px solid #00ff41;
-  color: #00ff41;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--matrix-primary);
+  color: var(--matrix-primary);
   padding: 0.75rem;
   border-radius: 0.5rem;
-  font-family: "Share Tech Mono", monospace;
+  font-family: var(--matrix-font);
   transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
 }
 
 /* Focus effect for input fields */
 .input-matrix:focus {
   outline: none;
-  box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41 inset;
+  box-shadow: 0 0 8px var(--matrix-primary),
+    0 0 16px var(--matrix-primary) inset;
 }
 
 /* Button styles */
 .btn-matrix {
   background: transparent;
-  border: 1px solid #00ff41;
+  border: 1px solid var(--matrix-primary);
   padding: 0.75rem;
   border-radius: 0.5rem;
-  color: #00ff41;
+  color: var(--matrix-primary);
   font-family: "Share Tech Mono", monospace;
   cursor: pointer;
   position: relative;
@@ -107,9 +208,9 @@ body {
 
 /* Button hover effect */
 .btn-matrix:hover {
-  background: #00ff41;
+  background: var(--matrix-primary);
   color: #000;
-  box-shadow: 0 0 20px #00ff41;
+  box-shadow: 0 0 20px var(--matrix-primary);
 }
 
 /* Message box specific width */
@@ -158,9 +259,9 @@ textarea {
 }
 
 .active-btn {
-  background: #00ff41;
+  background: var(--matrix-primary);
   color: #000;
-  box-shadow: 0 0 20px #00ff41;
+  box-shadow: 0 0 20px var(--matrix-primary);
   font-weight: bold; /* keep it bold for active too */
 }
 
@@ -187,22 +288,24 @@ form .btn-matrix {
 }
 .project-desc-popup {
   position: absolute;
-  left: 105%; /* Position to the right of the card */
+  left: 105%;
   top: 50%;
   transform: translateY(-50%) scale(0.8) rotateY(25deg);
-  min-width: 500px;
-  max-width: 700px;
-  background: rgba(0, 0, 0, 0.95);
-  color: #00ff41;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 16px #00ff4155;
+  min-width: 420px;
+  max-width: 640px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95));
+  color: var(--matrix-primary);
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 18px var(--matrix-primary-30),
+    0 0 0 1px var(--matrix-primary) inset;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.7s, transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.55s, transform 0.9s cubic-bezier(0.23, 1, 0.32, 1);
   z-index: 20;
-  text-align: center;
-  font-size: 0.95rem;
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.35;
 }
 
 .project-card:hover .project-desc-popup {
@@ -214,10 +317,11 @@ form .btn-matrix {
 /* Glitch effect */
 .glitch {
   position: relative;
-  color: #00ff41;
-  font-size: 4rem;
-  letter-spacing: 0.5em;
-  animation: glitch-skew 1s infinite linear alternate-reverse;
+  color: var(--matrix-primary);
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  letter-spacing: 0.35em;
+  animation: glitch-skew 2s infinite linear alternate-reverse;
+  filter: drop-shadow(0 0 6px var(--matrix-primary));
 }
 .glitch::before {
   content: attr(data-text);
@@ -418,38 +522,287 @@ form .btn-matrix {
 }
 
 @keyframes glitch-skew {
-  0% {
+  0%,
+  100% {
     transform: skew(1deg);
   }
   10% {
-    transform: skew(4deg);
-  }
-  20% {
-    transform: skew(-2deg);
-  }
-  30% {
-    transform: skew(1deg);
-  }
-  40% {
     transform: skew(3deg);
   }
-  50% {
-    transform: skew(-3deg);
+  25% {
+    transform: skew(-2deg);
   }
-  60% {
+  40% {
     transform: skew(2deg);
+  }
+  55% {
+    transform: skew(-3deg);
   }
   70% {
     transform: skew(1deg);
   }
-  80% {
-    transform: skew(-4deg);
-  }
-  90% {
+  85% {
     transform: skew(-2deg);
   }
-  100% {
-    transform: skew(1deg);
+}
+
+/* Typing effect cursor */
+.typing-cursor::after {
+  content: "_";
+  animation: blink 0.9s steps(2, start) infinite;
+  margin-left: 2px;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Control Panel */
+.matrix-control-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  min-width: 42px;
+  height: 42px;
+  border-radius: 999px; /* pill when label visible */
+  padding: 0 1rem;
+  background: var(--matrix-panel-bg);
+  border: 1px solid var(--matrix-primary); /* direct primary for immediate theme swap */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--matrix-primary);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px var(--matrix-primary), 0 0 16px var(--matrix-primary);
+  z-index: 200;
+  transition: background 0.3s, box-shadow 0.3s;
+  font-family: var(--matrix-font);
+  font-size: 0.65rem;
+  letter-spacing: 0.09em;
+  white-space: nowrap;
+}
+.matrix-control-toggle.closed {
+  /* More legible closed state (label visible) */
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0 1.35rem;
+  height: 48px;
+  min-width: 170px;
+  /* Removed steady glow, replaced by flicker animation below */
+  text-shadow: none;
+  box-shadow: 0 0 0 1px var(--matrix-primary) inset,
+    0 0 10px -2px var(--matrix-primary);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  animation: matrix-flicker 3.7s infinite steps(60, end);
+}
+.matrix-control-toggle.open {
+  width: 42px; /* return to square-ish when open (showing ×) */
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  letter-spacing: normal;
+}
+.matrix-control-toggle:hover {
+  box-shadow: 0 0 12px var(--matrix-primary), 0 0 24px var(--matrix-primary);
+  /* Stabilize on hover for readability */
+  animation: none;
+}
+.matrix-control-toggle:focus-visible {
+  outline: 2px solid var(--matrix-accent);
+  outline-offset: 3px;
+}
+
+/* Matrixy broken flicker effect (subtle, respects reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes matrix-flicker {
+    0%,
+    4% {
+      opacity: 1;
+      filter: none;
+    }
+    5% {
+      opacity: 0.55;
+    }
+    6% {
+      opacity: 1;
+    }
+    8% {
+      opacity: 0.35;
+      text-shadow: 0 0 6px var(--matrix-primary);
+    }
+    9% {
+      opacity: 0.9;
+      text-shadow: none;
+    }
+    14% {
+      opacity: 0.75;
+    }
+    15% {
+      opacity: 1;
+    }
+    19% {
+      opacity: 0.5;
+    }
+    20% {
+      opacity: 1;
+    }
+    27% {
+      opacity: 0.6;
+    }
+    28% {
+      opacity: 1;
+    }
+    36% {
+      opacity: 0.4;
+      text-shadow: 0 0 4px var(--matrix-primary);
+    }
+    37% {
+      opacity: 0.95;
+      text-shadow: none;
+    }
+    55% {
+      opacity: 0.85;
+    }
+    56% {
+      opacity: 0.3;
+    }
+    57% {
+      opacity: 0.9;
+    }
+    72% {
+      opacity: 0.65;
+    }
+    73% {
+      opacity: 1;
+    }
+    81% {
+      opacity: 0.5;
+    }
+    82% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 0.7;
+    }
+    91% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .matrix-control-toggle.closed {
+    min-width: 150px;
+    padding: 0 1rem;
+    font-size: 0.78rem;
+    height: 46px;
+  }
+}
+
+.matrix-control-panel {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 260px;
+  padding: 1rem 1.1rem 1.25rem;
+  background: var(--matrix-panel-bg);
+  border: 1px solid var(--matrix-primary);
+  backdrop-filter: blur(10px) saturate(160%);
+  border-radius: 0.75rem;
+  font-family: var(--matrix-font);
+  color: var(--matrix-primary);
+  box-shadow: 0 0 18px -4px var(--matrix-primary),
+    0 0 0 1px var(--matrix-primary) inset, 0 0 32px -6px var(--matrix-primary);
+  z-index: 190;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transform-origin: top right;
+  animation: panelIn 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+@keyframes panelIn {
+  from {
+    transform: scale(0.6) translateY(-10px);
+    opacity: 0;
+  }
+}
+.matrix-control-panel h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.matrix-control-panel label {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.matrix-control-panel input[type="range"] {
+  width: 100%;
+}
+.theme-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+.theme-buttons button {
+  flex: 1;
+  font-size: 0.65rem;
+  padding: 0.35rem 0.25rem;
+}
+
+/* Project tilt */
+.project-card {
+  perspective: 800px;
+  transition: transform 0.3s;
+}
+.project-card-inner {
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+.project-card:hover .project-card-inner {
+  box-shadow: 0 6px 22px -6px var(--matrix-primary-30);
+}
+
+/* Subtle scanline overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0 2px,
+    transparent 2px 4px
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.15;
+}
+
+/* Responsive project popup fallback */
+@media (max-width: 900px) {
+  .project-desc-popup {
+    position: static;
+    transform: none;
+    left: auto;
+    top: auto;
+    min-width: unset;
+    max-width: 100%;
+    margin-top: 0.75rem;
+    opacity: 1 !important;
+    pointer-events: auto;
+    animation: none;
   }
 }
 
