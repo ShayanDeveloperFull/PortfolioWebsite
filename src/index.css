@@ -285,8 +285,7 @@ form .btn-matrix {
   left: 105%;
   top: 50%;
   transform: translateY(-50%) scale(0.8) rotateY(25deg);
-  min-width: 420px;
-  max-width: 640px;
+  width: clamp(280px, 40vw, 500px);
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95));
   color: var(--matrix-primary);
   padding: 1rem 1.25rem;
@@ -295,11 +294,17 @@ form .btn-matrix {
     0 0 0 1px var(--matrix-primary) inset;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.55s, transform 0.9s cubic-bezier(0.23, 1, 0.32, 1);
-  z-index: 20;
+  transition: opacity 0.8s ease-out,
+    transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 999;
   text-align: left;
   font-size: 0.9rem;
   line-height: 1.35;
+  max-height: 80vh;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  /* Ensure it doesn't overflow off the right edge */
+  max-width: calc(100vw - 100% - 2rem);
 }
 
 .project-card:hover .project-desc-popup {
@@ -784,22 +789,6 @@ body::after {
   opacity: 0.15;
 }
 
-/* Responsive project popup fallback */
-@media (max-width: 900px) {
-  .project-desc-popup {
-    position: static;
-    transform: none;
-    left: auto;
-    top: auto;
-    min-width: unset;
-    max-width: 100%;
-    margin-top: 0.75rem;
-    opacity: 1 !important;
-    pointer-events: auto;
-    animation: none;
-  }
-}
-
 /* Responsive styles */
 @media (max-width: 600px) {
   section {
@@ -813,5 +802,11 @@ body::after {
   form input,
   form textarea {
     width: 100%;
+  }
+
+  .project-desc-popup {
+    font-size: 0.85rem;
+    padding: 0.875rem 1rem;
+    min-width: min(300px, 85vw);
   }
 }
