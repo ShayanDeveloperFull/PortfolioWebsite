@@ -350,15 +350,15 @@ form .btn-matrix {
 .name-with-photo {
   position: relative;
   display: inline-block;
-  padding-right: 12em; /* adjusted for 10.8em image */
+  padding-right: 10em; /* space for bigger default image */
 }
 .name-with-photo .profile-inline {
   position: absolute;
   top: 50%;
   right: 0;
   transform: translateY(-50%); /* fixed center align */
-  height: 10.8em; /* bumped size */
-  width: 10.8em; /* square */
+  height: 9em; /* bigger */
+  width: 9em; /* square */
   border-radius: 999px;
   object-fit: cover;
   pointer-events: none;
@@ -370,21 +370,21 @@ form .btn-matrix {
 @media (min-width: 640px) {
   /* sm */
   .name-with-photo {
-    padding-right: 13.1em; /* sm: image (12.3) + ~0.8em gap */
+    padding-right: 11.5em;
   }
   .name-with-photo .profile-inline {
-    height: 12.3em;
-    width: 12.3em;
+    height: 10.5em;
+    width: 10.5em;
   }
 }
 @media (min-width: 1024px) {
   /* lg */
   .name-with-photo {
-    padding-right: 15.1em; /* lg: image (14) + ~1.1em gap */
+    padding-right: 13em;
   }
   .name-with-photo .profile-inline {
-    height: 14em;
-    width: 14em;
+    height: 12em;
+    width: 12em;
   }
 }
 
