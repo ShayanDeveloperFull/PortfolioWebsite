@@ -152,8 +152,8 @@ const Home = () => {
     <section className="relative min-h-screen flex items-center justify-center bg-black text-matrix-green overflow-hidden">
       <div className="matrix-rain absolute inset-0 z-0">{rainDrops}</div>
       <div className="z-10 text-center space-y-6 max-w-4xl px-6">
-        <h1 className="font-matrix glitch" data-text="Welcome to The Grid">
-          Welcome to The Grid
+        <h1 className="font-matrix glitch" data-text="SHAYAN ASADPOUR">
+          SHAYAN ASADPOUR{" "}
         </h1>
         <h2 className="text-2xl md:text-3xl font-matrix typing-cursor min-h-[2.5rem]">
           {subtitle}
