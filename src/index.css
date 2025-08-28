@@ -346,6 +346,40 @@ form .btn-matrix {
   animation: glitch-anim2 1s infinite linear alternate-reverse;
 }
 
+/* Inline profile image next to name without affecting line height */
+.name-with-photo {
+  position: relative;
+  display: inline-block;
+  padding-right: 3.4em; /* space for bigger image */
+}
+.name-with-photo .profile-inline {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  height: 2.6em; /* bigger image */
+  width: 2.6em; /* square */
+  border-radius: 999px;
+  object-fit: cover;
+  pointer-events: none;
+  box-shadow: 0 0 8px var(--matrix-primary), 0 0 16px var(--matrix-primary-50);
+}
+
+/* Single-layer glitch (no duplicate pseudo elements) */
+.glitch-single {
+  position: relative;
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  letter-spacing: 0.35em;
+  filter: drop-shadow(0 0 6px var(--matrix-primary));
+  animation: glitch-skew 2s infinite linear alternate-reverse;
+  text-shadow: 0 0 4px var(--matrix-primary), 2px 0 #00fff9, -2px 0 #ff00c1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .glitch-single {
+    animation: none;
+  }
+}
+
 @keyframes glitch-anim {
   0% {
     clip: rect(3px, 9999px, 33px, 0);
