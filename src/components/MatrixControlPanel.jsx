@@ -84,25 +84,28 @@ export default function MatrixControlPanel() {
               {paused ? "Resume Rain" : "Pause Rain"}
             </button>
           </div>
-          <div style={{ marginTop: "0.5rem", display: "flex", gap: "0.5rem" }}>
-            {[
-              { label: "Slow", value: "slow" },
-              { label: "Normal", value: "normal" },
-              { label: "Fast", value: "fast" },
-            ].map((b) => (
-              <button
-                key={b.value}
-                type="button"
-                className={`btn-matrix ${
-                  speedMode === b.value ? "active-btn" : ""
-                }`}
-                onClick={() => setSpeedMode(b.value)}
-                aria-pressed={speedMode === b.value}
-                style={{ flex: 1 }}
-              >
-                {b.label}
-              </button>
-            ))}
+          <div>
+            <label>Speed</label>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              {[
+                { label: "Slow", value: "slow" },
+                { label: "Normal", value: "normal" },
+                { label: "Fast", value: "fast" },
+              ].map((b) => (
+                <button
+                  key={b.value}
+                  type="button"
+                  className={`btn-matrix ${
+                    speedMode === b.value ? "active-btn" : ""
+                  }`}
+                  onClick={() => setSpeedMode(b.value)}
+                  aria-pressed={speedMode === b.value}
+                  style={{ flex: 1 }}
+                >
+                  {b.label}
+                </button>
+              ))}
+            </div>
           </div>
           <div>
             <label>Theme</label>
