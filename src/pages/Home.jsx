@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import "../index.css";
 
 const Home = () => {
-  const fullName = "SHAYAN ASADPOUR";
+  const firstName = "SHAYAN ";
+  const lastName = "ASADPOUR";
   const nameTypeSpeed = 140;
   const subtitleTypeSpeed = 80;
   const descriptionTypeSpeed = 40;
@@ -13,30 +14,66 @@ const Home = () => {
   const [secondDescriptionDisplay, setSecondDescriptionDisplay] = useState("");
   const [nameTypingComplete, setNameTypingComplete] = useState(false);
   const [imageAnimationComplete, setImageAnimationComplete] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 600);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   useEffect(() => {
     let i = 0;
     let active = true;
+    let currentlyTypingLastName = false;
+
     const step = () => {
       if (!active) return;
-      setNameDisplay(fullName.slice(0, i + 1));
-      i += 1;
-      if (i < fullName.length) {
-        setTimeout(step, nameTypeSpeed);
+
+      if (!currentlyTypingLastName) {
+        if (i < firstName.length) {
+          setNameDisplay(firstName.slice(0, i + 1));
+          i += 1;
+          setTimeout(step, nameTypeSpeed);
+        } else {
+          currentlyTypingLastName = true;
+          i = 0;
+          if (isMobile) {
+            setNameDisplay(firstName + "\n");
+          }
+          setTimeout(step, nameTypeSpeed);
+        }
       } else {
-        setNameTypingComplete(true);
+        if (i < lastName.length) {
+          const currentDisplay = isMobile
+            ? firstName + "\n" + lastName.slice(0, i + 1)
+            : firstName + lastName.slice(0, i + 1);
+          setNameDisplay(currentDisplay);
+          i += 1;
+          setTimeout(step, nameTypeSpeed);
+        } else {
+          setNameTypingComplete(true);
+        }
       }
     };
+
     setTimeout(step, 250);
     return () => {
       active = false;
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     if (!imageAnimationComplete) return;
 
-    const prefix = "Full‑Stack Developer | React • Node • ";
+    const prefix = isMobile
+      ? "Full‑Stack Developer |\nReact • Node • "
+      : "Full‑Stack Developer | React • Node • ";
     const words = ["TypeScript", "PostgreSQL", "REST APIs"];
     let wordIndex = 0;
     let charIndex = 0;
@@ -123,7 +160,7 @@ const Home = () => {
     return () => {
       active = false;
     };
-  }, [imageAnimationComplete]);
+  }, [imageAnimationComplete, isMobile]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black text-matrix-green overflow-hidden">
@@ -136,6 +173,7 @@ const Home = () => {
               lineHeight: 1,
               minHeight: "1em",
               minWidth: "20ch",
+              whiteSpace: "pre-line",
             }}
           >
             {nameDisplay}
@@ -151,8 +189,22 @@ const Home = () => {
             />
           )}
         </div>
-        <h2 className="text-2xl md:text-3xl font-matrix typing-cursor min-h-[2.5rem]">
-          {subtitleDisplay}
+        <h2
+          className={`text-2xl md:text-3xl font-matrix ${
+            !isMobile ? "typing-cursor" : ""
+          } min-h-[2.5rem] subtitle-responsive`}
+        >
+          {isMobile
+            ? subtitleDisplay.split("\n").map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index === 0 && <br />}
+                  {index === 1 && (
+                    <span className="typing-cursor-mobile">_</span>
+                  )}
+                </span>
+              ))
+            : subtitleDisplay}
         </h2>
         <p className="text-lg md:text-xl font-matrix leading-relaxed opacity-90">
           {descriptionDisplay.split("\n").map((line, index) => (
