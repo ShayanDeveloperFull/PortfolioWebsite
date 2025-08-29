@@ -1,9 +1,7 @@
-/* Global styles for matrix rain effect */
 html,
 body {
   margin: 0;
   padding: 0;
-  /* Reverted to solid black background (keeping other variables for potential future use) */
   --matrix-bg-gradient: none;
   background: #000;
   overflow: hidden;
@@ -13,7 +11,6 @@ body {
   color: var(--matrix-primary);
 }
 
-/* THEME VARIABLES */
 :root {
   --matrix-primary: #00ff41;
   --matrix-accent: #00fff9;
@@ -23,7 +20,6 @@ body {
   --matrix-panel-border: var(--matrix-primary);
   --matrix-font: "Share Tech Mono", monospace;
   --matrix-glow: 0 0 6px var(--matrix-primary), 0 0 12px var(--matrix-primary);
-  /* Derived color variants */
   --matrix-primary-10: color-mix(
     in srgb,
     var(--matrix-primary) 10%,
@@ -72,7 +68,6 @@ body {
 }
 
 body.theme-cyan {
-  /* Neo Cyan (calmer) */
   --matrix-primary: #00e0ff;
   --matrix-accent: #7bffb2;
   --matrix-panel-border: #00e0ff;
@@ -87,23 +82,22 @@ body.theme-green {
   --matrix-accent: #00fff9;
   --matrix-panel-border: #00ff41;
 }
-/* Amber retro terminal */
+
 body.theme-amber {
   --matrix-primary: #ffbf00;
   --matrix-accent: #ff6b00;
 }
-/* Electric Violet synthwave */
+
 body.theme-violet {
   --matrix-primary: #a855ff;
   --matrix-accent: #00ffe5;
 }
-/* Stealth subdued */
+
 body.theme-stealth {
   --matrix-primary: #b8f5d4;
   --matrix-accent: #7fd0ff;
 }
 
-/* Matrix rain effect container */
 .matrix-rain {
   position: absolute;
   top: 0;
@@ -111,13 +105,12 @@ body.theme-stealth {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: -1; /* Ensures the rain stays behind other content */
+  z-index: -1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Space out the rain drops */
+  justify-content: space-between;
 }
 
-/* Each rain drop line */
 .matrix-rain .rain-drop {
   position: absolute;
   width: 2px;
@@ -135,20 +128,18 @@ body.theme-stealth {
   mix-blend-mode: screen;
 }
 
-/* Keyframe for continuous rain effect */
 @keyframes rain {
   0% {
-    transform: translateY(-100%); /* Start above the screen */
+    transform: translateY(-100%);
   }
   100% {
-    transform: translateY(100%); /* Move down to the bottom of the screen */
+    transform: translateY(100%);
   }
 }
 
-/* Fade-in animation for success message */
 .fade-in {
   opacity: 0;
-  animation: fadeIn 5s ease-in forwards; /* Increased duration to 5s */
+  animation: fadeIn 5s ease-in forwards;
 }
 
 @keyframes fadeIn {
@@ -157,7 +148,6 @@ body.theme-stealth {
   }
 }
 
-/* Text and button color */
 .text-matrix-green {
   color: var(--matrix-primary);
 }
@@ -166,7 +156,6 @@ body.theme-stealth {
   font-family: "Share Tech Mono", monospace;
 }
 
-/* Input field styles */
 .input-matrix {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--matrix-primary);
@@ -178,14 +167,12 @@ body.theme-stealth {
   backdrop-filter: blur(4px);
 }
 
-/* Focus effect for input fields */
 .input-matrix:focus {
   outline: none;
   box-shadow: 0 0 8px var(--matrix-primary),
     0 0 16px var(--matrix-primary) inset;
 }
 
-/* Button styles */
 .btn-matrix {
   background: transparent;
   border: 1px solid var(--matrix-primary);
@@ -197,10 +184,9 @@ body.theme-stealth {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  font-weight: bold; /* <-- BOLD TEXT */
+  font-weight: bold;
 }
 
-/* Button hover effect */
 .btn-matrix:hover {
   background: var(--matrix-primary);
   color: #000;
@@ -210,6 +196,27 @@ body.theme-stealth {
 .message-box {
   width: 100%;
   max-width: 600px;
+}
+
+@media (max-width: 480px) {
+  .message-box {
+    max-width: 320px !important;
+    width: 92% !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .message-box {
+    max-width: 300px !important;
+    width: 90% !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .message-box {
+    max-width: 400px !important;
+    width: 90% !important;
+  }
 }
 
 section {
@@ -240,6 +247,13 @@ form input[name="email"] {
   width: 15%;
 }
 
+@media (max-width: 640px) {
+  form input[name="name"],
+  form input[name="email"] {
+    width: 60% !important;
+  }
+}
+
 textarea {
   max-width: 100%;
   width: 100%;
@@ -266,6 +280,32 @@ form button {
 form .btn-matrix {
   width: auto;
   align-self: flex-start;
+}
+
+.send-button {
+  min-width: 60px;
+  min-height: 48px;
+  width: auto;
+  align-self: flex-end;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .send-button {
+    min-width: 56px;
+    min-height: 56px;
+    border-radius: 50%;
+    padding: 0;
+    position: relative;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .send-button .w-5 {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .project-card {
@@ -382,7 +422,6 @@ form .btn-matrix {
   }
 }
 
-/* Mobile specific adjustments for smaller image and better positioning */
 @media (max-width: 480px) {
   .name-with-photo {
     width: clamp(14ch, 35vw, 250px);
@@ -393,20 +432,16 @@ form .btn-matrix {
     right: -15em;
   }
 
-  /* Smaller description text on iPhone */
   p {
     font-size: 0.8rem;
     line-height: 1.4;
   }
 
-  /* Smaller Matrix Control button for mobile */
   .matrix-control-toggle.closed {
     position: fixed;
     top: 0.6rem;
     right: 0.6rem;
-    /* Keep pill shape (same as desktop) */
     border-radius: 999px;
-    /* Much smaller sizing for iPhone */
     min-width: 118px;
     height: 40px;
     padding: 0 0.85rem;
