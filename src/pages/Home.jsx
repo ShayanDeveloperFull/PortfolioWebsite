@@ -133,9 +133,12 @@ const Home = () => {
   const fullName = "SHAYAN ASADPOUR";
   const nameTypeSpeed = 140; // ms per char for name
   const subtitleTypeSpeed = 80; // ms per char for subtitle (faster than name)
+  const descriptionTypeSpeed = 40; // ms per char for description (faster than subtitle)
   // Start with empty; we reserve space separately to avoid layout shift
   const [nameDisplay, setNameDisplay] = useState("");
   const [subtitleDisplay, setSubtitleDisplay] = useState("");
+  const [descriptionDisplay, setDescriptionDisplay] = useState("");
+  const [secondDescriptionDisplay, setSecondDescriptionDisplay] = useState("");
 
   // Name typing effect
   useEffect(() => {
@@ -162,6 +165,7 @@ const Home = () => {
     let wordIndex = 0;
     let charIndex = 0;
     let active = true;
+    let descriptionStarted = false; // Track if description has been triggered
 
     const step = () => {
       if (!active) return;
@@ -174,12 +178,24 @@ const Home = () => {
       charIndex++;
 
       if (charIndex === currentWord.length) {
-        // Word is complete, wait then smoothly transition to next word
+        // Word is complete
+
+        // If this is the first time "TypeScript" is completed, start description
+        if (currentWord === "TypeScript" && !descriptionStarted) {
+          descriptionStarted = true;
+          // Start description typing immediately when TypeScript is done
+          setTimeout(() => {
+            startDescriptionTyping();
+          }, 200); // Very brief delay for smooth transition
+        }
+
+        // Wait then smoothly transition to next word
         setTimeout(() => {
           if (active) {
             // Move to next word and reset for typing
             wordIndex = (wordIndex + 1) % words.length;
             charIndex = 0;
+
             // Instantly show just the prefix (smooth transition)
             setSubtitleDisplay(prefix);
             setTimeout(step, 200); // Brief pause before typing next word
@@ -189,6 +205,37 @@ const Home = () => {
       }
 
       setTimeout(step, subtitleTypeSpeed); // Continue typing next character
+    };
+
+    // Function to start description typing
+    const startDescriptionTyping = () => {
+      const firstDescription =
+        "I'm a passionate coder focused on crafting performant, accessible & immersive web experiences. I thrive across the stack—from\nintuitive React interfaces to resilient Node / Express APIs & optimized data flows.";
+      const secondDescription =
+        "Always iterating, always learning. Exploring design systems, real‑time architectures & scalable cloud patterns. Let's build something meaningful.";
+
+      let i = 0;
+      const typeFirstDescription = () => {
+        if (i <= firstDescription.length) {
+          setDescriptionDisplay(firstDescription.slice(0, i));
+          i++;
+          setTimeout(typeFirstDescription, descriptionTypeSpeed);
+        } else {
+          // Start second description after first is done
+          setTimeout(() => {
+            let j = 0;
+            const typeSecondDescription = () => {
+              if (j <= secondDescription.length) {
+                setSecondDescriptionDisplay(secondDescription.slice(0, j));
+                j++;
+                setTimeout(typeSecondDescription, descriptionTypeSpeed);
+              }
+            };
+            typeSecondDescription();
+          }, 300); // Brief pause between descriptions
+        }
+      };
+      typeFirstDescription();
     };
 
     // Start typing prefix first
@@ -254,16 +301,15 @@ const Home = () => {
           {subtitleDisplay}
         </h2>
         <p className="text-lg md:text-xl font-matrix leading-relaxed opacity-90">
-          I'm a passionate coder focused on crafting performant, accessible &
-          immersive web experiences. I thrive across the stack—from
-          <br />
-          intuitive React interfaces to resilient Node / Express APIs &
-          optimized data flows.
+          {descriptionDisplay.split("\n").map((line, index) => (
+            <span key={index}>
+              {line}
+              {index === 0 && <br />}
+            </span>
+          ))}
         </p>
         <p className="text-base md:text-lg font-matrix opacity-80">
-          Always iterating, always learning. Exploring design systems, real‑time
-          architectures & scalable cloud patterns. Let's build something
-          meaningful.
+          {secondDescriptionDisplay}
         </p>
       </div>
     </section>
