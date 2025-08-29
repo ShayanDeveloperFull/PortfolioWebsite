@@ -350,15 +350,17 @@ form .btn-matrix {
 .name-with-photo {
   position: relative;
   display: inline-block;
-  padding-right: 10em; /* space for bigger default image */
+  /* Use a fixed width based on the full name length to prevent shifting */
+  width: clamp(20ch, 50vw, 800px); /* Reserve space for full name */
+  min-height: 1em;
 }
 .name-with-photo .profile-inline {
   position: absolute;
   top: 50%;
-  right: 0;
+  right: -7em; /* Position it a little more to the right */
   transform: translateY(-50%); /* fixed center align */
-  height: 9em; /* bigger */
-  width: 9em; /* square */
+  height: 10em; /* Made a little bigger */
+  width: 10em; /* Made a little bigger */
   border-radius: 999px;
   object-fit: cover;
   pointer-events: none;
@@ -370,21 +372,23 @@ form .btn-matrix {
 @media (min-width: 640px) {
   /* sm */
   .name-with-photo {
-    padding-right: 11.5em;
+    width: clamp(22ch, 55vw, 900px);
   }
   .name-with-photo .profile-inline {
-    height: 10.5em;
-    width: 10.5em;
+    height: 11.5em; /* A little bigger on medium screens */
+    width: 11.5em; /* A little bigger on medium screens */
+    right: -8em; /* A little more to the right on medium screens */
   }
 }
 @media (min-width: 1024px) {
   /* lg */
   .name-with-photo {
-    padding-right: 13em;
+    width: clamp(24ch, 60vw, 1000px);
   }
   .name-with-photo .profile-inline {
-    height: 12em;
-    width: 12em;
+    height: 13em; /* A little bigger on large screens */
+    width: 13em; /* A little bigger on large screens */
+    right: -9em; /* A little more to the right on large screens */
   }
 }
 

@@ -12,6 +12,8 @@ const useTypeRotate = ({
   startDelay = 700,
   instantWords = false,
   prefixChunkSize = 1, // how many chars to add per tick for prefix
+  prefixSpeedFactor = 0.4, // multiplier on typeSpeed for prefix typing cadence
+  prefixMinDelay = 5, // minimum delay (ms) between prefix chunks (was hard-coded 15)
   swapWords = false, // if true: no per-char delete; just swap full words
   skipDelete = false, // if true: no delete animation; just jump to next word
 }) => {
@@ -33,7 +35,11 @@ const useTypeRotate = ({
         if (nextPrefix === prefix) {
           typedPrefixRef.current = true;
         }
-        timeoutRef.current = setTimeout(run, Math.max(15, typeSpeed * 0.4));
+        // Schedule next prefix chunk; allow very fast speeds by using configurable min delay
+        timeoutRef.current = setTimeout(
+          run,
+          Math.max(prefixMinDelay, typeSpeed * prefixSpeedFactor)
+        );
         return;
       }
 
@@ -111,6 +117,7 @@ const useTypeRotate = ({
     holdTimeLastWord,
     startDelay,
     prefixChunkSize,
+    prefixMinDelay,
     swapWords,
     skipDelete,
     instantWords,
@@ -122,18 +129,91 @@ const useTypeRotate = ({
 const Home = () => {
   const density = 100; // static baseline now
   const [dropsKey] = useState(0);
-  const subtitle = useTypeRotate({
-    prefix: "Full‑Stack Developer | React • Node • ",
-    words: ["TypeScript", "PostgreSQL", "REST APIs"],
-    typeSpeed: 60, // speed for typing each char
-    holdTime: 1000, // hold each word for 1 second
-    holdTimeLastWord: 1000, // last word also 1 second
-    startDelay: 250,
-    instantWords: false, // type out words
-    prefixChunkSize: 2,
-    swapWords: false,
-    skipDelete: true, // no delete animation, just next word typing
-  });
+  // Typewriter for the main name (single run)
+  const fullName = "SHAYAN ASADPOUR";
+  const nameTypeSpeed = 140; // ms per char for name
+  const subtitleTypeSpeed = 80; // ms per char for subtitle (faster than name)
+  // Start with empty; we reserve space separately to avoid layout shift
+  const [nameDisplay, setNameDisplay] = useState("");
+  const [subtitleDisplay, setSubtitleDisplay] = useState("");
+
+  // Name typing effect
+  useEffect(() => {
+    let i = 0;
+    let active = true;
+    const step = () => {
+      if (!active) return;
+      setNameDisplay(fullName.slice(0, i + 1));
+      i += 1;
+      if (i < fullName.length) {
+        setTimeout(step, nameTypeSpeed);
+      }
+    };
+    setTimeout(step, 250); // slight initial delay before typing starts
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  // Subtitle typing effect with rotating words
+  useEffect(() => {
+    const prefix = "Full‑Stack Developer | React • Node • ";
+    const words = ["TypeScript", "PostgreSQL", "REST APIs"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let active = true;
+
+    const step = () => {
+      if (!active) return;
+
+      const currentWord = words[wordIndex];
+
+      // Typing the word character by character
+      const currentText = prefix + currentWord.slice(0, charIndex + 1);
+      setSubtitleDisplay(currentText);
+      charIndex++;
+
+      if (charIndex === currentWord.length) {
+        // Word is complete, wait then smoothly transition to next word
+        setTimeout(() => {
+          if (active) {
+            // Move to next word and reset for typing
+            wordIndex = (wordIndex + 1) % words.length;
+            charIndex = 0;
+            // Instantly show just the prefix (smooth transition)
+            setSubtitleDisplay(prefix);
+            setTimeout(step, 200); // Brief pause before typing next word
+          }
+        }, 1500); // Hold time before transitioning
+        return;
+      }
+
+      setTimeout(step, subtitleTypeSpeed); // Continue typing next character
+    };
+
+    // Start typing prefix first
+    let prefixIndex = 0;
+    const typePrefix = () => {
+      if (!active) return;
+      setSubtitleDisplay(prefix.slice(0, prefixIndex + 1));
+      prefixIndex++;
+
+      if (prefixIndex === prefix.length) {
+        // Prefix is complete, start rotating words
+        setTimeout(step, 200);
+      } else {
+        setTimeout(typePrefix, subtitleTypeSpeed);
+      }
+    };
+
+    // Start after name is done typing
+    const nameDelay = 250 + fullName.length * nameTypeSpeed;
+    setTimeout(typePrefix, nameDelay);
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // density change events removed
 
@@ -154,20 +234,24 @@ const Home = () => {
       <div className="z-10 text-center space-y-6 max-w-4xl px-6">
         <div className="name-with-photo">
           <h1
-            className="font-matrix glitch leading-none"
-            data-text="SHAYAN ASADPOUR"
-            style={{ lineHeight: 1 }}
+            className="font-matrix glitch leading-none relative inline-block"
+            data-text={nameDisplay || " "}
+            style={{
+              lineHeight: 1,
+              minHeight: "1em", // Reserve minimum height to prevent layout shift
+              minWidth: "20ch", // Reserve approximate width for the full name
+            }}
           >
-            SHAYAN ASADPOUR
+            {nameDisplay}
           </h1>
           <img
             src="/profile-photo.png"
-            alt="Profile"
+            alt="Shayan Asadpour Profile"
             className="profile-inline"
           />
         </div>
         <h2 className="text-2xl md:text-3xl font-matrix typing-cursor min-h-[2.5rem]">
-          {subtitle}
+          {subtitleDisplay}
         </h2>
         <p className="text-lg md:text-xl font-matrix leading-relaxed opacity-90">
           I'm a passionate coder focused on crafting performant, accessible &
