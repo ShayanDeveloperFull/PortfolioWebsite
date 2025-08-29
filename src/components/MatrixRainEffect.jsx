@@ -12,7 +12,7 @@ const MatrixRainEffect = () => {
     const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const nums = "0123456789";
 
-    const alphabet = latin + nums; // Use only Latin and numbers
+    const alphabet = latin + nums;
 
     const fontSize = 16;
     const columns = canvas.width / fontSize;
@@ -27,7 +27,6 @@ const MatrixRainEffect = () => {
       context.fillStyle = "rgba(0, 0, 0, 0.05)";
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Use current theme primary color (fallback to green)
       const themePrimary =
         getComputedStyle(document.body)
           .getPropertyValue("--matrix-primary")
@@ -49,9 +48,9 @@ const MatrixRainEffect = () => {
     };
 
     let paused = false;
-    const NORMAL_INTERVAL = 30; // ms per frame draw attempt
-    const SLOW_INTERVAL = 100; // slower
-    const FAST_INTERVAL = 15; // faster
+    const NORMAL_INTERVAL = 30;
+    const SLOW_INTERVAL = 100;
+    const FAST_INTERVAL = 15;
     let currentInterval = NORMAL_INTERVAL;
     let intervalId;
 

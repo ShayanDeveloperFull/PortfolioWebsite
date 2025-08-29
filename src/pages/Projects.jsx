@@ -29,7 +29,6 @@ const Projects = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center bg-black text-matrix-green overflow-hidden">
       <div className="matrix-rain absolute inset-0 z-0"></div>
-      {/* Rain effect div */}
 
       <h2
         className="text-4xl font-matrix text-center mb-8 w-full glitch"
@@ -38,7 +37,6 @@ const Projects = () => {
         My Projects
       </h2>
 
-      {/* Two-column layout */}
       <div className="grid gap-16">
         {projectList.map((proj, idx) => (
           <a

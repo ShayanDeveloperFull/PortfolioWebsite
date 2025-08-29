@@ -11,7 +11,7 @@ export default function MatrixControlPanel() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [paused, setPaused] = useState(false);
-  const [speedMode, setSpeedMode] = useState("normal"); // normal | slow | fast
+  const [speedMode, setSpeedMode] = useState("normal");
 
   useEffect(() => {
     document.body.classList.toggle("matrix-paused", paused);
@@ -28,12 +28,11 @@ export default function MatrixControlPanel() {
     );
   }, [speedMode]);
 
-  // Handle smooth panel animation
   useEffect(() => {
     if (open) {
       setShouldRender(true);
       setIsAnimating(true);
-      // Small delay to ensure the element is rendered before starting animation
+
       const timer = setTimeout(() => {
         setIsAnimating(false);
       }, 50);
@@ -43,7 +42,7 @@ export default function MatrixControlPanel() {
       const timer = setTimeout(() => {
         setShouldRender(false);
         setIsAnimating(false);
-      }, 800); // Increased to match the new CSS transition duration
+      }, 800);
       return () => clearTimeout(timer);
     }
   }, [open]);
@@ -73,7 +72,7 @@ export default function MatrixControlPanel() {
           }`}
         >
           <h4>MATRIX CONTROL</h4>
-          {/* Removed legacy rain speed slider now that discrete speed mode buttons exist */}
+
           <div style={{ marginTop: "0.5rem" }}>
             <button
               type="button"

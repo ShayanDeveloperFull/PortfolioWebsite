@@ -11,7 +11,6 @@ const Contact = () => {
 
   const [status, setStatus] = useState("");
 
-  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,22 +19,20 @@ const Contact = () => {
     });
   };
 
-  // Send email with EmailJS
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Send email via EmailJS
     emailjs
       .sendForm(
-        "service_2b87vh9", // Your Service ID
-        "template_u778il2", // Your Template ID
-        e.target, // The form element
-        "cOGhxeiLBvUHxb8ei" // Your User ID
+        "service_2b87vh9",
+        "template_u778il2",
+        e.target,
+        "cOGhxeiLBvUHxb8ei"
       )
       .then(
         (result) => {
-          setStatus("He's Beginning To Believe..."); // Set Morpheus quote
-          setFormData({ name: "", email: "", message: "" }); // Reset form
+          setStatus("He's Beginning To Believe...");
+          setFormData({ name: "", email: "", message: "" });
         },
         (error) => {
           setStatus("There was an error sending the message.");
@@ -62,7 +59,6 @@ const Contact = () => {
         className="flex flex-col space-y-6 w-full max-w-md"
         onSubmit={handleSubmit}
       >
-        {/* Name Input */}
         <div className="flex w-full">
           <input
             type="text"
@@ -75,7 +71,6 @@ const Contact = () => {
           />
         </div>
 
-        {/* Email Input */}
         <div className="flex w-full justify-center">
           <input
             type="email"
@@ -88,7 +83,6 @@ const Contact = () => {
           />
         </div>
 
-        {/* Message Textarea with Button */}
         <div className="flex flex-col w-full">
           <textarea
             name="message"
@@ -100,7 +94,6 @@ const Contact = () => {
             required
           ></textarea>
 
-          {/* Button */}
           <button
             type="submit"
             className="btn-matrix p-4 text-lg rounded-md border-2 border-matrix-green bg-matrix-green text-black hover:bg-transparent hover:text-matrix-green mt-4"
@@ -111,8 +104,8 @@ const Contact = () => {
       </form>
       {status && (
         <div className="mt-6 text-xl font-matrix fade-in">
-          <p>{status}</p> {/* Morpheus quote */}
-          <p className="text-lg mt-4">- Morpheus</p> {/* Morpheus caption */}
+          <p>{status}</p>
+          <p className="text-lg mt-4">- Morpheus</p>
         </div>
       )}
     </section>

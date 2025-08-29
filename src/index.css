@@ -207,74 +207,65 @@ body.theme-stealth {
   box-shadow: 0 0 20px var(--matrix-primary);
 }
 
-/* Message box specific width */
 .message-box {
-  width: 100%; /* Set the width to 100% */
-  max-width: 600px; /* Optional: Max width */
+  width: 100%;
+  max-width: 600px;
 }
 
-/* Section for the contact page */
 section {
   width: 100%;
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Left-align content */
+  align-items: flex-start;
 }
 
-/* Form container styles */
 form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  margin-left: 0; /* Align form to left edge */
-  margin-right: 0; /* Ensure form isn't centered */
-  max-width: 100%; /* Allow form to take full width */
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
 }
 
-/* Input and Textarea */
 form input,
 form textarea {
-  width: 100%; /* Ensure full width for all input fields */
+  width: 100%;
 }
 
-/* Input fields for Name and Email - set to 15% width */
 form input[name="name"],
 form input[name="email"] {
   width: 15%;
 }
 
-/* Textarea specific styles */
 textarea {
   max-width: 100%;
   width: 100%;
-  flex-grow: 1; /* Make the textarea grow to fill available space */
+  flex-grow: 1;
 }
 
 .active-btn {
   background: var(--matrix-primary);
   color: #000;
   box-shadow: 0 0 20px var(--matrix-primary);
-  font-weight: bold; /* keep it bold for active too */
+  font-weight: bold;
 }
 
-/* Button container alignment */
 form .flex {
   display: flex;
-  align-items: flex-end; /* Align children (button) to the bottom */
+  align-items: flex-end;
 }
 
-/* Aligning button to the bottom */
 form button {
-  align-self: flex-end; /* Ensure the button aligns to the bottom */
-  margin-top: 5rem; /* Increase margin-top to push the button further down */
+  align-self: flex-end;
+  margin-top: 5rem;
 }
 
-/* Button width */
 form .btn-matrix {
   width: auto;
-  align-self: flex-start; /* Align the button to the left */
+  align-self: flex-start;
 }
 
 .project-card {
@@ -303,7 +294,7 @@ form .btn-matrix {
   max-height: 80vh;
   overflow-y: auto;
   backdrop-filter: blur(10px);
-  /* Ensure it doesn't overflow off the right edge */
+
   max-width: calc(100vw - 100% - 2rem);
 }
 
@@ -313,7 +304,6 @@ form .btn-matrix {
   transform: translateY(-50%) scale(1) rotateY(0deg);
 }
 
-/* Glitch effect */
 .glitch {
   position: relative;
   color: var(--matrix-primary);
@@ -346,53 +336,52 @@ form .btn-matrix {
   animation: glitch-anim2 1s infinite linear alternate-reverse;
 }
 
-/* Inline profile image next to name without affecting line height */
 .name-with-photo {
   position: relative;
   display: inline-block;
-  /* Use a fixed width based on the full name length to prevent shifting */
-  width: clamp(20ch, 50vw, 800px); /* Reserve space for full name */
+
+  width: clamp(20ch, 50vw, 800px);
   min-height: 1em;
 }
 .name-with-photo .profile-inline {
   position: absolute;
   top: 50%;
-  right: -7em; /* Position it a little more to the right */
-  transform: translateY(-50%); /* fixed center align */
-  height: 10em; /* Made a little bigger */
-  width: 10em; /* Made a little bigger */
+  right: -7em;
+  transform: translateY(-50%);
+  height: 10em;
+  width: 10em;
   border-radius: 999px;
   object-fit: cover;
   pointer-events: none;
-  /* Prevent inheriting any transforms/animations from glitch text */
-  animation: none !important;
+
   will-change: auto;
 }
 
+.name-with-photo .profile-inline:not(.matrix-entrance) {
+  animation: none !important;
+}
+
 @media (min-width: 640px) {
-  /* sm */
   .name-with-photo {
     width: clamp(22ch, 55vw, 900px);
   }
   .name-with-photo .profile-inline {
-    height: 11.5em; /* A little bigger on medium screens */
-    width: 11.5em; /* A little bigger on medium screens */
-    right: -8em; /* A little more to the right on medium screens */
+    height: 11.5em;
+    width: 11.5em;
+    right: -8em;
   }
 }
 @media (min-width: 1024px) {
-  /* lg */
   .name-with-photo {
     width: clamp(24ch, 60vw, 1000px);
   }
   .name-with-photo .profile-inline {
-    height: 13em; /* A little bigger on large screens */
-    width: 13em; /* A little bigger on large screens */
-    right: -9em; /* A little more to the right on large screens */
+    height: 13em;
+    width: 13em;
+    right: -9em;
   }
 }
 
-/* Single-layer glitch (no duplicate pseudo elements) */
 .glitch-single {
   position: relative;
   font-size: clamp(2.5rem, 6vw, 4.2rem);
@@ -606,7 +595,6 @@ form .btn-matrix {
   }
 }
 
-/* Typing effect cursor */
 .typing-cursor::after {
   content: "_";
   animation: blink 0.9s steps(2, start) infinite;
@@ -618,17 +606,16 @@ form .btn-matrix {
   }
 }
 
-/* Control Panel */
 .matrix-control-toggle {
   position: fixed;
   top: 1rem;
   right: 1rem;
   min-width: 42px;
   height: 42px;
-  border-radius: 999px; /* pill when label visible */
+  border-radius: 999px;
   padding: 0 1rem;
   background: var(--matrix-panel-bg);
-  border: 1px solid var(--matrix-primary); /* direct primary for immediate theme swap */
+  border: 1px solid var(--matrix-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -644,14 +631,13 @@ form .btn-matrix {
   white-space: nowrap;
 }
 .matrix-control-toggle.closed {
-  /* More legible closed state (label visible) */
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   padding: 0 1.35rem;
   height: 48px;
   min-width: 170px;
-  /* Removed steady glow, replaced by flicker animation below */
+
   text-shadow: none;
   box-shadow: 0 0 0 1px var(--matrix-primary) inset,
     0 0 10px -2px var(--matrix-primary);
@@ -663,7 +649,7 @@ form .btn-matrix {
   animation: matrix-flicker 3.7s infinite steps(60, end);
 }
 .matrix-control-toggle.open {
-  width: 42px; /* return to square-ish when open (showing ×) */
+  width: 42px;
   padding: 0;
   border-radius: 50%;
   font-size: 1.1rem;
@@ -671,7 +657,7 @@ form .btn-matrix {
 }
 .matrix-control-toggle:hover {
   box-shadow: 0 0 12px var(--matrix-primary), 0 0 24px var(--matrix-primary);
-  /* Stabilize on hover for readability */
+
   animation: none;
 }
 .matrix-control-toggle:focus-visible {
@@ -679,7 +665,6 @@ form .btn-matrix {
   outline-offset: 3px;
 }
 
-/* Matrixy broken flicker effect (subtle, respects reduced motion) */
 @media (prefers-reduced-motion: no-preference) {
   @keyframes matrix-flicker {
     0%,
@@ -834,7 +819,6 @@ form .btn-matrix {
   padding: 0.35rem 0.25rem;
 }
 
-/* Project tilt */
 .project-card {
   perspective: 800px;
   transition: transform 0.3s;
@@ -847,7 +831,6 @@ form .btn-matrix {
   box-shadow: 0 6px 22px -6px var(--matrix-primary-30);
 }
 
-/* Subtle scanline overlay */
 body::after {
   content: "";
   position: fixed;
@@ -863,7 +846,6 @@ body::after {
   opacity: 0.15;
 }
 
-/* Responsive styles */
 @media (max-width: 600px) {
   section {
     padding: 1rem;
@@ -883,4 +865,57 @@ body::after {
     padding: 0.875rem 1rem;
     min-width: min(300px, 85vw);
   }
+}
+
+.name-with-photo .profile-inline.matrix-entrance {
+  opacity: 0;
+  transform: scale(0.3) rotateY(90deg) translateY(-50%);
+  filter: blur(10px) brightness(0.3);
+  animation: matrixEnter 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards !important;
+}
+
+@keyframes matrixEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotateY(90deg) translateY(-50%);
+    filter: blur(10px) brightness(0.3);
+  }
+
+  25% {
+    opacity: 0.3;
+    transform: scale(0.6) rotateY(45deg) translateY(-50%);
+    filter: blur(8px) brightness(0.5);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(0.9) rotateY(15deg) translateY(-50%);
+    filter: blur(4px) brightness(0.8);
+  }
+
+  75% {
+    opacity: 0.9;
+    transform: scale(1.05) rotateY(-5deg) translateY(-50%);
+    filter: blur(2px) brightness(1.1);
+  }
+
+  90% {
+    opacity: 1;
+    transform: scale(1.02) rotateY(2deg) translateY(-50%);
+    filter: blur(1px) brightness(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg) translateY(-50%);
+    filter: blur(0px) brightness(1);
+  }
+}
+
+.name-with-photo .profile-inline.matrix-entrance.entered {
+  transition: transform 0.3s ease;
+}
+
+.name-with-photo .profile-inline.matrix-entrance.entered:hover {
+  transform: scale(1.05) translateY(-50%);
 }
