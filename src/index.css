@@ -417,8 +417,27 @@ form .btn-matrix {
   }
   .name-with-photo .profile-inline {
     height: 13em;
-    width: 13em;
-    right: -9em;
+  }
+}
+@media (max-width: 400px) {
+  .matrix-control-toggle.closed {
+    top: 0rem;
+  }
+  .message-box {
+    max-width: 290px !important;
+    width: 92% !important;
+  }
+  .contact-section p,
+  .contact-section .contact-description {
+    font-size: 0.85rem !important;
+  }
+  /* iPhone 14 specific: make Contact page text smaller */
+  section > p,
+  section > p > p,
+  section > p > strong,
+  section > p > span {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
   }
 }
 
@@ -427,9 +446,10 @@ form .btn-matrix {
     width: clamp(14ch, 35vw, 250px);
   }
   .name-with-photo .profile-inline {
-    height: 5.5em;
+    height: 6.5em;
     width: 5.5em;
     right: -15em;
+    top: 40%;
   }
 
   p {
@@ -442,10 +462,10 @@ form .btn-matrix {
     top: 0.6rem;
     right: 0.6rem;
     border-radius: 999px;
-    min-width: 118px;
-    height: 40px;
-    padding: 0 0.85rem;
-    font-size: 0.6rem;
+    min-width: 100px;
+    height: 34px;
+    padding: 0 0.7rem;
+    font-size: 0.55rem;
     font-weight: 600;
     letter-spacing: 0.05em;
   }
@@ -827,10 +847,10 @@ form .btn-matrix {
 
 @media (max-width: 640px) {
   .matrix-control-toggle.closed {
-    min-width: 130px;
-    height: 42px;
-    padding: 0 0.95rem;
-    font-size: 0.68rem;
+    min-width: 100px;
+    height: 34px;
+    padding: 0 0.7rem;
+    font-size: 0.55rem;
     border-radius: 999px;
   }
 }
