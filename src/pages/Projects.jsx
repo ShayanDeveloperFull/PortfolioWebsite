@@ -47,7 +47,11 @@ const Projects = () => {
             className="project-card inline-block relative"
           >
             <h3 className="btn-matrix inline-block">{proj.title}</h3>
-            <div className="project-desc-popup">{proj.description}</div>
+            {typeof window !== "undefined" && window.innerWidth >= 1024 && (
+              <div className="project-desc-popup only-desktop">
+                {proj.description}
+              </div>
+            )}
           </a>
         ))}
       </div>

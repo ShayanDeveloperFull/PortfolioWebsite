@@ -312,6 +312,11 @@ form .btn-matrix {
   position: relative;
 }
 .project-desc-popup {
+  @media (max-width: 1023px) {
+    .project-desc-popup {
+      display: none !important;
+    }
+  }
   position: absolute;
   left: 105%;
   top: 50%;
