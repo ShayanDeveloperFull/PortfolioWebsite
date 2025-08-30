@@ -11,6 +11,12 @@ body {
   color: var(--matrix-primary);
 }
 
+/* Prevent mobile zoom on input focus by setting minimum font-size */
+input,
+textarea {
+  font-size: 16px !important;
+}
+
 :root {
   --matrix-primary: #00ff41;
   --matrix-accent: #00fff9;
@@ -275,6 +281,12 @@ form .flex {
 form button {
   align-self: flex-end;
   margin-top: 5rem;
+}
+
+/* Fix send button position for contact form */
+form .btn-matrix {
+  margin-top: auto !important;
+  align-self: flex-end !important;
 }
 
 form .btn-matrix {
