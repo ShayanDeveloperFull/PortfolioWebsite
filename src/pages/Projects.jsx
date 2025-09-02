@@ -2,7 +2,7 @@ const Projects = () => {
   const projectList = [
     {
       title: "ChillNest",
-      link: "https://nestwebsite.onrender.com/",
+      link: "https://chillnestweb.onrender.com/",
       description:
         "This full-stack Airbnb clone is a booking platform that lets users sign up, log in, and browse available stays using filters like date, location, and price. It features secure authentication with JWT, a responsive frontend built with React and CSS (Flexbox/Grid), and a backend powered by Node.js, Express, and MongoDB. An admin dashboard is included for managing listings and bookings, with all interactions handled through RESTful APIs.",
     },
