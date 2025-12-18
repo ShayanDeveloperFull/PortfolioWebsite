@@ -7,6 +7,12 @@ const Projects = () => {
         "This full-stack Airbnb clone is a booking platform that lets users sign up, log in, and browse available stays using filters like date, location, and price. It features secure authentication with JWT, a responsive frontend built with React and CSS (Flexbox/Grid), and a backend powered by Node.js, Express, and MongoDB. An admin dashboard is included for managing listings and bookings, with all interactions handled through RESTful APIs.",
     },
     {
+      title: "BlinkChat",
+      link: "https://blinkchat-hymo.onrender.com/",
+      description:
+        "BlinkChat is a full-stack real-time chat application built with React, Node.js, Express, and MongoDB. It uses Socket.IO to enable instant messaging, typing indicators, and online/offline presence, with secure JWT-based authentication. Zustand is used on the frontend to manage and synchronize real-time state, while RESTful APIs handle users, messages, and conversations. The app is fully responsive and deployed on Render.",
+    },
+    {
       title: "Foodicpe",
       link: "https://shayan-food-app.vercel.app",
       description:
@@ -37,16 +43,24 @@ const Projects = () => {
         My Projects
       </h2>
 
-      <div className="grid gap-16">
+      <div
+        className="w-full px-8"
+        style={{
+          display: "grid",
+          gridAutoFlow: "column",
+          gridTemplateRows: "repeat(4, 1fr)",
+          columnGap: "1rem",
+        }}
+      >
         {projectList.map((proj, idx) => (
           <a
             key={idx}
             href={proj.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="project-card inline-block relative"
+            className="project-card relative flex items-center gap-8"
           >
-            <h3 className="btn-matrix inline-block">{proj.title}</h3>
+            <h3 className="btn-matrix flex-shrink-0">{proj.title}</h3>
             {typeof window !== "undefined" && window.innerWidth >= 1024 && (
               <div className="project-desc-popup only-desktop">
                 {proj.description}
