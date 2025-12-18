@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 const Projects = () => {
+  const [activeProject, setActiveProject] = useState(null);
+
   const projectList = [
     {
       title: "ChillNest",
@@ -44,7 +48,7 @@ const Projects = () => {
       </h2>
 
       <div
-        className="w-full px-8"
+        className="projects-grid relative w-full px-8"
         style={{
           display: "grid",
           gridAutoFlow: "column",
@@ -58,16 +62,17 @@ const Projects = () => {
             href={proj.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="project-card relative flex items-center gap-8"
+            className="project-card"
+            onMouseEnter={() => setActiveProject(proj)}
+            onMouseLeave={() => setActiveProject(null)}
           >
-            <h3 className="btn-matrix flex-shrink-0">{proj.title}</h3>
-            {typeof window !== "undefined" && window.innerWidth >= 1024 && (
-              <div className="project-desc-popup only-desktop">
-                {proj.description}
-              </div>
-            )}
+            <h3 className="btn-matrix">{proj.title}</h3>
           </a>
         ))}
+
+        <div className={`project-desc-popup ${activeProject ? "visible" : ""}`}>
+          {activeProject?.description}
+        </div>
       </div>
     </section>
   );
