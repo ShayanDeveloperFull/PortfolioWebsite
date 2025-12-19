@@ -948,9 +948,9 @@ form .btn-matrix {
 
 .project-card {
   perspective: 800px;
-  width: 180px;
+  width: 176px;
   transition: transform 0.3s;
-  font-size: 0.91rem;
+  font-size: 0.89rem;
 }
 .project-card-inner {
   transition: transform 0.3s ease, box-shadow 0.4s ease;
