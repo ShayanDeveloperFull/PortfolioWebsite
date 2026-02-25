@@ -5,6 +5,12 @@ const Projects = () => {
 
   const projectList = [
     {
+      title: "CaseKodiak",
+      link: "https://your-ecommerce-link.com",
+      description:
+        "CaseKodiak is a full-stack eCommerce platform built with Next.js and TypeScript, leveraging the App Router and server components for a scalable architecture. It integrates Stripe Checkout with secure webhook verification to ensure reliable payment processing and order creation. Prisma ORM is used for type-safe database modeling with PostgreSQL, managing products, users, and orders with strong relational integrity. Authentication and role-based access control are implemented with Kinde to protect admin routes for product management, inventory updates, and order tracking.",
+    },
+    {
       title: "ChillNest",
       link: "https://chillnestweb.onrender.com/",
       description:
